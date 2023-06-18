@@ -1,6 +1,6 @@
 <h1 align="center"> go-heat.nvim 🔥 </h1>
 
-A neovim plugin to show the heatmap of your Go project for a bird eye view of the test coverage.
+A neovim plugin to show the heatmap of your Go project, for a bird eye view of the test coverage.
 
 ## Installation
 ```lua
@@ -25,6 +25,7 @@ local configs = {
   svg_output = '/tmp/go-heat/temp.svg',      -- if not nil, will output the svg to this file
   open_in = 'browser',                      -- 'terminal' | 'browser' (terminal has lower quality than browser)
   browser_type = 'safari'                    -- only peculiar to Darwin; tested options: 'safari' | 'chrome' | 'arc' 
+  debug = false,                            -- if true, will print debug messages
   -- any option passed to browser_type must be executable with `open` -a <name> in macos
 }
 ```
@@ -40,3 +41,16 @@ vim.api.nvim_set_keymap('n', '<localleader>gth', '<cmd>lua require("go-heat").sh
 - [go](https://golang.org/doc/install) should be installed
 - [go-cover-treemap](https://github.com/nikolaydubina/go-cover-treemap/tree/main) should be installed
 - [toggleterm](https://github.com/akinsho/toggleterm) should be installed (if opening in 'terminal') 
+
+## References
+- [go cover treemap](https://github.com/nikolaydubina/go-cover-treemap/): A tool to generate treemap visualizations of Go cover profiles
+
+<!-- add my checklist and todo for future releases -->
+## Checklist
+- [ ] Add convenient plugs and probably keymaps
+- [ ] Improve terminal render quality
+- [ ] Add more options for go-cover-treemap e.g. package_only, colors, etc
+- [ ] Reduce plugin dependencies / add scripts to install dependencies for all platforms
+---
+Please star🌟 this repository if you found go-heat useful.  
+Feel free to open an issue 🔭 or PR ➕ if you have any suggestions or contributions.
