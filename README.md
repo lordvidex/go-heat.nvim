@@ -1,6 +1,5 @@
 <h1 align="center"> go-heat.nvim 🔥 </h1>
 
-![Screenshot]()
 A neovim plugin to show the heatmap of your Go project for a bird eye view of the test coverage.
 
 ## Installation
@@ -13,7 +12,11 @@ use {  'lordvidex/go-heat.nvim',
   end
 }
 ```
-
+## Screenshots
+### Heat in-Browser
+![Browser Shot](https://github.com/lordvidex/go-heat.nvim/assets/49334512/20e6c4e4-ec81-4c6d-a9b0-2a6aa8a38f84)
+### Heat in-Neovim
+![Terminal Shot](https://github.com/lordvidex/go-heat.nvim/assets/49334512/90d86f1d-98ab-49a5-9fa1-e7416b05e318)
 ## Default configurations
 Below are the default configurations. You can override them by passing a table to the setup function.
 ```lua
