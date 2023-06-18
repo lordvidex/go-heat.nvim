@@ -27,14 +27,14 @@ M.generate_svg = function(cfg)
   end
   local cov_file = or_file(cfg.coverage_file)
   if not cov_file then
-    print('no coverage file found')
+    utils.print('no coverage file found')
     return nil
   end
   local cmd = string.format('go-cover-treemap -coverprofile=%s > %s', cov_file, svg_file)
-  print(cmd)
+  utils.print(cmd)
   local res = os.execute(cmd)
   if not res then
-    print('failed to run go-cover-treemap')
+    utils.print('failed to run go-cover-treemap')
     return nil
   end
   return svg_file

@@ -1,5 +1,14 @@
 local M = {}
 
+local printt = function(...)
+  local configs = require 'go-heat.configs'.configs
+  if configs.debug then
+    print(...)
+  end
+end
+
+M.print = printt
+
 M.check_deps = function()
   local dependencies = {
     { 'go',               false },
@@ -69,14 +78,14 @@ M.create_file = function(path)
     local failed = false
     vim.loop.fs_mkdir(dir, 755, function(err, ok)
       if err then
-        print('failed to create directory: ' .. err)
+        printt('failed to create directory: ' .. err)
         failed = true
         return
       end
       if ok then
-        print('directory created')
+        printt('directory created')
       else
-        print('failed to create directory')
+        printt('failed to create directory')
       end
     end)
     if failed then
@@ -89,6 +98,28 @@ M.create_file = function(path)
   end
   vim.loop.fs_close(file)
 end
+
+local function dump(o)
+  if type(o) == 'table' then
+    local s = '{ '
+    for k, v in pairs(o) do
+      if type(k) ~= 'number' then
+        k = '"' .. k .. '"'
+      end
+      s = s .. '[' .. k .. '] = ' .. dump(v) .. ','
+    end
+    return s .. '} '
+  else
+    return tostring(o)
+  end
+end
+
+M.print_configs = function()
+  local configs = require 'go-heat.configs'.configs
+  print(dump(configs))
+end
+
+
 
 
 local setup = function()
