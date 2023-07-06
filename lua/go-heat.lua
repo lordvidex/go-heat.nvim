@@ -18,8 +18,8 @@ end
 M.print_configs = require 'go-heat.utils'.print_configs
 
 M.setup = function(cfg)
-  require 'go-heat.utils'.setup()
   require 'go-heat.configs'.setup(cfg)
+  require 'go-heat.utils'.setup()
   display.init()
 end
 return M

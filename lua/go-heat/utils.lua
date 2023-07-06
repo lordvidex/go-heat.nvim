@@ -72,14 +72,15 @@ M.file_exists = function(file)
   return err == nil
 end
 
+local created_dirs = {}
 M.create_file = function(path)
   local dir = vim.fn.expand(vim.fn.fnamemodify(path, ':h'))
-  if not M.file_exists(dir) then
-    local failed = false
-    vim.loop.fs_mkdir(dir, 755, function(err, ok)
+  if not created_dirs[dir] then
+    pcall(vim.loop.fs_rmdir, dir) -- ignore errors
+    pcall(vim.loop.fs_mkdir, dir, 755, function(err, ok)
       if err then
-        printt('failed to create directory: ' .. err)
-        failed = true
+        -- TODO: the err could be that the folder already exists
+        printt('create directory error:' .. err)
         return
       end
       if ok then
@@ -88,14 +89,14 @@ M.create_file = function(path)
         printt('failed to create directory')
       end
     end)
-    if failed then
-      return
-    end
+    created_dirs[dir] = true
   end
+  -- create the file
   local file = vim.loop.fs_open(path, 'w', 664)
   if not file then
     return
   end
+  -- close the file
   vim.loop.fs_close(file)
 end
 
